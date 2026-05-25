@@ -1,0 +1,375 @@
+:root {
+    --color-bg: #07090e;
+    --color-surface: rgba(13, 27, 24, 0.4);
+    --color-neon-green: #10b981;
+    --color-neon-emerald: #059669;
+    --color-neon-purple: #8b5cf6;
+    --color-glass-border: rgba(255, 255, 255, 0.08);
+    --color-text: #f8fafc;
+    --color-text-muted: #94a3b8;
+    --card-red: #ef4444;
+    --card-dark: #cbd5e1;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    background-image: 
+        radial-gradient(circle at 50% -20%, rgba(16, 185, 129, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 10% 90%, rgba(139, 92, 246, 0.06) 0%, transparent 40%);
+    color: var(--color-text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    gap: 24px;
+}
+
+/* Game Board Area */
+.blackjack-table {
+    width: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, rgba(0, 0, 0, 0.4) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: 24px;
+    padding: 32px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 50px rgba(16, 185, 129, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+}
+
+/* Hand Containers */
+.hand-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    min-height: 170px;
+}
+
+.hand-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.hand-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.hand-score {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--color-neon-green);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.cards-list {
+    display: flex;
+    gap: 16px;
+    min-height: 120px;
+    padding: 10px 0;
+    overflow-x: auto;
+    align-items: center;
+}
+
+/* Premium Visual Cards */
+.card-visual {
+    width: 80px;
+    height: 120px;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    transform-style: preserve-3d;
+    animation: dealCard 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+}
+
+@keyframes dealCard {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) rotate(-15deg) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0) scale(1);
+    }
+}
+
+.card-visual:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.card-visual.red-card {
+    color: var(--card-red);
+}
+
+.card-visual.dark-card {
+    color: var(--card-dark);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.card-suit-center {
+    font-size: 2.2rem;
+    align-self: center;
+    line-height: 1;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    font-weight: 700;
+    transform: rotate(180deg);
+    line-height: 1;
+}
+
+/* Hidden/Face Down Card */
+.card-visual.face-down {
+    background: repeating-linear-gradient(
+        45deg,
+        #1e1b4b 0px,
+        #1e1b4b 10px,
+        #312e81 10px,
+        #312e81 20px
+    );
+    border: 2px solid var(--color-neon-purple);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    color: transparent;
+}
+
+.card-visual.face-down::after {
+    content: '♠';
+    color: rgba(139, 92, 246, 0.4);
+    font-size: 2.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Central Info Display */
+.game-status-display {
+    background: rgba(13, 27, 24, 0.6);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-message {
+    font-size: 1.15rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #f8fafc, #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.status-message.won {
+    background: linear-gradient(135deg, #34d399, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.status-message.lost {
+    background: linear-gradient(135deg, #f87171, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+/* Controls Section */
+.blackjack-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Chips Betting Container */
+.chips-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.chip {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 3px dashed var(--color-glass-border);
+    background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 0 5px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+}
+
+.chip:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.chip.active {
+    transform: scale(1.15) translateY(-4px);
+    border-style: solid;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Color custom chips */
+.chip-10 { border-color: #3b82f6; color: #60a5fa; }
+.chip-50 { border-color: #ef4444; color: #f87171; }
+.chip-100 { border-color: #10b981; color: #34d399; }
+.chip-500 { border-color: #f59e0b; color: #fbbf24; }
+.chip-1000 { border-color: #8b5cf6; color: #a78bfa; }
+
+/* General Buttons layout */
+.btn-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.btn {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.07) 100%);
+    border: 1px solid var(--color-glass-border);
+    color: var(--color-text);
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    outline: none;
+    user-select: none;
+}
+
+.btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Specific high premium neon buttons */
+.btn-play {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+    border-color: rgba(16, 185, 129, 0.3);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.btn-play:hover:not(:disabled) {
+    background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+    border-color: var(--color-neon-green);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.4), 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.btn-hit {
+    border-color: rgba(139, 92, 246, 0.3);
+    color: #a78bfa;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.05);
+}
+
+.btn-hit:hover:not(:disabled) {
+    background: rgba(139, 92, 246, 0.08);
+    border-color: var(--color-neon-purple);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+}
+
+.btn-stand {
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+}
+
+.btn-stand:hover:not(:disabled) {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: #f59e0b;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+}
+
+.bet-display {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: 10px;
+}
+
+.bet-display span {
+    color: var(--color-neon-green);
+    font-weight: 700;
+}

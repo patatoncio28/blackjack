@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Pro - Casual Play Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main>
+        <div class="blackjack-table">
+            <!-- Dealer Hand Area -->
+            <div class="hand-container" id="dealer-area">
+                <div class="hand-header">
+                    <span class="hand-label">Crupier</span>
+                    <span class="hand-score" id="dealer-score">0</span>
+                </div>
+                <div class="cards-list" id="dealer-cards">
+                    <!-- Cards will be populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Central Round Status Banner -->
+            <div class="game-status-display">
+                <div class="status-message" id="round-status">Elige tu apuesta y pulsa Repartir para comenzar.</div>
+            </div>
+
+            <!-- Player Hand Area -->
+            <div class="hand-container" id="player-area">
+                <div class="hand-header">
+                    <span class="hand-label">Jugador</span>
+                    <span class="hand-score" id="player-score">0</span>
+                </div>
+                <div class="cards-list" id="player-cards">
+                    <!-- Cards populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="blackjack-controls">
+            <!-- Dynamic Chips Selection -->
+            <div class="chips-container" id="chips-selector">
+                <div class="chip chip-10 active" data-amount="10">$10</div>
+                <div class="chip chip-50" data-amount="50">$50</div>
+                <div class="chip chip-100" data-amount="100">$100</div>
+                <div class="chip chip-500" data-amount="500">$500</div>
+                <div class="chip chip-1000" data-amount="1000">$1K</div>
+            </div>
+
+            <div class="bet-display">Apuesta Seleccionada: <span id="current-bet-display">$10</span></div>
+
+            <!-- Buttons -->
+            <div class="btn-group">
+                <button class="btn btn-play" id="btn-deal">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Repartir
+                </button>
+                <button class="btn btn-hit" id="btn-hit" disabled>
+                    Pedir Carta
+                </button>
+                <button class="btn btn-stand" id="btn-stand" disabled>
+                    Plantarse
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Import external game module logic -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
